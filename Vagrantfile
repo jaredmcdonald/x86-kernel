@@ -72,7 +72,7 @@ Vagrant.configure(2) do |config|
       sudo apt-get install vim -y
       sudo apt-get install -y qemu
       sudo apt-get install -y curl
-      sudo apt-get install -y make
+      sudo apt-get install -y build-essential
       curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain nightly
   SHELL
 
