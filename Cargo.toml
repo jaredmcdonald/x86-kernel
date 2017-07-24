@@ -1,10 +1,11 @@
 [package]
-name = "my_os"
-version = "1.0.0"
-authors = ["ag_dubs"]
+name = "jared_os"
+version = "0.0.1"
+authors = ["jared"]
 
 [lib]
 crate-type = ["staticlib"]
 
 [dependencies]
-rlibc = "0.1.4"
+rlibc = "1.0"
+

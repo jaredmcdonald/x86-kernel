@@ -7,7 +7,7 @@ SECTIONS {
   .boot :
   {
     /* put the header at the beginning */
-    *(.multiboot_header)
+    KEEP(*(.multiboot_header))
   }
 
   .text :
