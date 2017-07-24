@@ -75,6 +75,7 @@ Vagrant.configure(2) do |config|
       sudo apt-get install -y build-essential
       curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain nightly
       cargo install xargo
+      rustup component add rust-src
   SHELL
 
   config.ssh.forward_x11 = true
