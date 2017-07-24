@@ -71,8 +71,9 @@ Vagrant.configure(2) do |config|
       sudo apt-get install git -y
       sudo apt-get install vim -y
       sudo apt-get install -y qemu
-      curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh -s -- --yes
-      multirust default nightly-2015-11-19 
+      sudo apt-get install -y curl
+      sudo apt-get install -y make
+      curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain nightly
   SHELL
 
   config.ssh.forward_x11 = true
