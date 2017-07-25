@@ -1,17 +1,23 @@
 ENTRY(start)
 
 SECTIONS {
-  /* sets load address to MiB (convention) */
-  . = 1M;
+    . = 1M;
 
-  .boot :
-  {
-    /* put the header at the beginning */
-    KEEP(*(.multiboot_header))
-  }
+    .boot :
+    {
+        KEEP(*(.multiboot_header))
+    }
 
-  .text :
-  {
-    *(.text)
-  }
+    .text :
+    {
+        *(.text .text.*)
+    }
+
+    .rodata : {
+        *(.rodata .rodata.*)
+    }
+
+    .data.rel.ro : {
+        *(.data.rel.ro.local*) *(.data.rel.ro .data.rel.ro.*)
+    }
 }

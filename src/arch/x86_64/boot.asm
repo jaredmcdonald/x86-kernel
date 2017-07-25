@@ -6,6 +6,7 @@ section .text
 bits 32
 start:
     mov esp, stack_top
+    mov edi, ebx
 
     call check_multiboot
     call check_cpuid
@@ -79,7 +80,7 @@ check_cpuid:
 .no_cpuid:
     mov al, "1"
     jmp error
-    
+
 check_long_mode:
     ; test if extended processor info in available
     mov eax, 0x80000000    ; implicit argument for cpuid
@@ -108,7 +109,7 @@ set_up_page_tables:
     mov eax, p2_table
     or eax, 0b11 ; present + writable
     mov [p3_table], eax
-    
+
     mov ecx, 0         ; counter variable
 
 .map_p2_table:
@@ -156,7 +157,7 @@ p3_table:
 p2_table:
     resb 4096
 stack_bottom:
-    resb 64
+    resb 4096 * 4
 stack_top:
 
 section .rodata

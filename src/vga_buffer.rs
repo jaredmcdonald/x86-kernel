@@ -101,6 +101,15 @@ impl Writer {
             self.buffer().chars[row][col].write(blank);
         }
     }
+
+    pub fn print_color_line(&mut self, color: Color) {
+        for col in 0..BUFFER_WIDTH {
+            self.buffer().chars[BUFFER_HEIGHT - 1][col].write(ScreenChar {
+                ascii_character: b' ',
+                color_code: ColorCode::new(Color::Black, color),
+            })
+        }
+    }
 }
 
 impl fmt::Write for Writer {
@@ -123,6 +132,10 @@ pub fn print(args: fmt::Arguments) {
     WRITER.lock().write_fmt(args).unwrap();
 }
 
+pub fn print_color_line(color: Color) {
+    WRITER.lock().print_color_line(color);
+}
+
 macro_rules! print {
     ($($arg:tt)*) => ({
         $crate::vga_buffer::print(format_args!($($arg)*));
@@ -133,6 +146,17 @@ macro_rules! println {
     ($fmt:expr) => (print!(concat!($fmt, "\n")));
     ($fmt:expr, $($arg:tt)*) => (print!(concat!($fmt, "\n"), $($arg)*));
 }
+
+// pub fn animate_bounce(s: &str, n: i32) {
+//     for _ in 0..n {
+//         for i in 0..BUFFER_WIDTH {
+//             println!("{text:>width$}", text=s, width=i);
+//         }
+//         for i in 0..BUFFER_WIDTH {
+//             println!("{text:>width$}", text=s, width=BUFFER_WIDTH - i);
+//         }
+//     }
+// }
 
 pub fn clear_screen() {
     for _ in 0..BUFFER_HEIGHT {
